@@ -9,7 +9,7 @@ class DBBuilder {
     protected $groupByQuery = [];
 
     protected $whereOperator = [
-        '=', '>', '>=', '<', '<=', '<>',
+        '=', '>', '>=', '<', '<=', '<>', '!=',
     ];
 
     protected function getEnv()
