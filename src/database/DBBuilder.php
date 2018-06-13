@@ -10,8 +10,11 @@ use database\trait\GroupBy;
 use database\trait\OrderBy;
 
 class DBBuilder {
+    
     protected $table    = null;
     protected $db       = null;
+
+    use Join, Limit, Query, Execute, GroupBy, OrderBy;
 
     protected function setDB()
     {
