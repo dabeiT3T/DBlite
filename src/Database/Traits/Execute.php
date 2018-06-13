@@ -32,6 +32,14 @@ trait Execute {
 
     public function find($id, $col='id')
     {
+        if ($this->_join || 
+            $this->_where || 
+            $this->_groupBy || 
+            $this->_orderBy || 
+            $this->_skip
+        )
+            throw new Exception("Error Processing Request", 1);
+            
         $this->where($col, $id);
 
         return $this->first();

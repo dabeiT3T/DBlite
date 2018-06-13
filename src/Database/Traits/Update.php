@@ -9,7 +9,7 @@ trait Update {
         $prepare = '';
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         foreach ($data as $key => $item) {
-            $prepare .= "$key = $item, ";
+            $prepare .= "$key = " . $this->quote($item) . ", ";
         }
 
         return substr($prepare, 0, -2);
@@ -29,7 +29,6 @@ trait Update {
         if ($this->_where)
             $exec .= " WHERE {$this->_where}";
 
-        $this->_db->exec($exec);
-        return $this->_db->rowCount();
+        return $this->_db->exec($exec);
     }
 }

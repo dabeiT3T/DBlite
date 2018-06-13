@@ -34,7 +34,6 @@ trait Insert {
 
         $exec = "INSERT INTO {$this->_table} " . $this->combineInsert($data);
 
-        $this->_db->exec($exec);
-        return $this->_db->rowCount();
+        return $this->_db->exec($exec);
     }
 }

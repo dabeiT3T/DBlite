@@ -19,7 +19,6 @@ trait Delete {
         if ($this->_where)
             $exec .= " WHERE {$this->_where}";
 
-        $this->_db->exec($exec);
-        return $this->_db->rowCount();
+        return $this->_db->exec($exec);
     }
 }
