@@ -41,12 +41,16 @@ trait Query {
 
     protected function where3Args($data, $operator)
     {
-        if (!in_array($data[1], strtoupper($this->whereOperator)))
+        if (!in_array(strtoupper($data[1]), $this->whereOperator))
             throw new Exception("Error Processing Request", 1);
         
         if ($this->_where)
             $this->_where .= $operator;
-        $this->_where .= '(' . $data[0] . " {$data[1]} " . $this->quote($data[1]) . ')';
+
+        if (strtoupper($data[1]) != 'LIKE')
+            $this->_where .= '(' . $data[0] . " {$data[1]} " . $this->quote($data[1]) . ')';
+        else
+            $this->_where .= '(' . $data[0] . " {$data[1]} " . $this->_db->quote($data[1]) . ')';
     }
 
     /**
