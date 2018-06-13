@@ -14,7 +14,7 @@ class GetEnv {
         $this->path = $path;
     }
 
-    public static function getDBSets()
+    public function getDBSets()
     {
         $file = fopen($this->path, 'r');
         if ($file) {

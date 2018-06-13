@@ -1,19 +1,18 @@
 <?php
 
-namespace database\trait;
+namespace database\Traits;
 
 trait Limit {
 
-
-    protected $skip = null;
-    protected $take = null;
+    protected $_skip = 0;
+    protected $_take = null;
 
     /**
      * skip
      */
     public function skip(int $skip)
     {
-        $this->skip = $skip;
+        $this->_skip = $skip;
         return $this;
     }
 
@@ -22,7 +21,7 @@ trait Limit {
      */
     public function take(int $take)
     {
-        $this->take = $take;
+        $this->_take = $take;
         return $this;
     }
 }

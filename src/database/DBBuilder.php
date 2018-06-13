@@ -2,25 +2,30 @@
 
 namespace database;
 
-use database\trait\Join;
-use database\trait\Limit;
-use database\trait\Query;
-use database\trait\Execute;
-use database\trait\GroupBy;
-use database\trait\OrderBy;
+use database\Traits\Join;
+use database\Traits\Limit;
+use database\Traits\Query;
+use database\Traits\Utils;
+use database\Traits\Delete;
+use database\Traits\Insert;
+use database\Traits\Update;
+use database\Traits\Execute;
+use database\Traits\GroupBy;
+use database\Traits\OrderBy;
 
 class DBBuilder {
     
-    protected $table    = null;
-    protected $db       = null;
+    protected $_table    = null;
+    protected $_db       = null;
 
-    use Join, Limit, Query, Execute, GroupBy, OrderBy;
+    use Join, Limit, Utils, Query, Execute, GroupBy, OrderBy;
+    use Delete, Insert, Update;
 
     protected function setDB()
     {
-        $env = GetEnv::getDBSets();
+        $env = (new GetEnv)->getDBSets();
         $req = "{$env['DB_CONNECTION']}:host={$env['DB_HOST']};port={$env['DB_PORT']};dbname={$env['DB_DATABASE']}";
-        $this->db = new PDO($req, $env['DB_USERNAME'], $env['DB_PASSWORD']);
+        $this->_db = new \PDO($req, $env['DB_USERNAME'], $env['DB_PASSWORD']);
     }
 
     /**
@@ -30,13 +35,9 @@ class DBBuilder {
      */
     public function __construct($table)
     {
-        $this->table = $table;
+        $this->_table = $table;
         $this->setDB();
     }
 
-    public function __destruct()
-    {
-        if ($this->db)
-            $this->db->close();
-    }
+    public function __destruct() {}
 }
