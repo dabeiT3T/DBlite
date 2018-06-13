@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use database\DBlite;
+use Database\DBlite;
 
 
 // var_dump(DBlite::table('products')

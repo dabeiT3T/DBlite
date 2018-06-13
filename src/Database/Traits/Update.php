@@ -1,6 +1,6 @@
 <?php
 
-namespace database\Traits;
+namespace Database\Traits;
 
 trait Update {
 

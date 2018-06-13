@@ -1,17 +1,17 @@
 <?php
 
-namespace database;
+namespace Database;
 
-use database\Traits\Join;
-use database\Traits\Limit;
-use database\Traits\Query;
-use database\Traits\Utils;
-use database\Traits\Delete;
-use database\Traits\Insert;
-use database\Traits\Update;
-use database\Traits\Execute;
-use database\Traits\GroupBy;
-use database\Traits\OrderBy;
+use Database\Traits\Join;
+use Database\Traits\Limit;
+use Database\Traits\Query;
+use Database\Traits\Utils;
+use Database\Traits\Delete;
+use Database\Traits\Insert;
+use Database\Traits\Update;
+use Database\Traits\Execute;
+use Database\Traits\GroupBy;
+use Database\Traits\OrderBy;
 
 class DBBuilder {
     
