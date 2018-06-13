@@ -1,19 +1,12 @@
 <?php
-require_once (__DIR__ . '/DBBuilder.php'); 
+
+namespace database;
 
 class DBlite {
 
     /**
-     * Instance of DBBuilder
-     *
-     * @var ImageManager
-     */
-    // public static $builder;
-
-    /**
      * Creates a new instance
      *
-     * @param WarpingManager $manager
      */
     public function __construct()
     {
@@ -26,5 +19,3 @@ class DBlite {
     }
 }
 
-
-$db = DBlite::table('apple');
