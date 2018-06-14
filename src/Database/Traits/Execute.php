@@ -76,11 +76,11 @@ trait Execute {
         $pages['last_page']     = (int)ceil($total/$per);
         $pages['current_page']  = min($page, $pages['last_page']);
         $pages['from']  = ($pages['current_page']-1) * $per + 1;
-        $pages['to']    = $pages['from'] + min($per, $total-$pages['from']);
+        $pages['to']    = $pages['from'] + min($per, $total-$pages['from'])-1;
         $next = min($pages['current_page']+1, $pages['last_page']);
         $prev = max($pages['current_page']-1, 1);
-        $pages['next_page_url'] = $pages['current_page'] == $pages['last_page']? null: "{$_SERVER['REQUEST_URI']}?page={$next}";
-        $pages['prev_page_url'] = $pages['current_page'] == 1? null: "{$_SERVER['REQUEST_URI']}?{$col}={$prev}";
+        $pages['next_page_url'] = $pages['current_page'] == $pages['last_page']? null: "{$_SERVER['PHP_SELF']}?page={$next}";
+        $pages['prev_page_url'] = $pages['current_page'] == 1? null: "{$_SERVER['PHP_SELF']}?{$col}={$prev}";
 
         // get data
         $this->_skip = $pages['from'] - 1;
