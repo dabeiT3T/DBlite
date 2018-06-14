@@ -16,3 +16,8 @@ $db = DBlite::table('new_table')->find(3);
 //         ->delete();
 
 var_dump($db);
+
+var_dump(intval(DBlite::table('new_table')->select('COUNT(*) as total')->first()['total']));
+
+
+var_dump(DBlite::table('new_table')->paginate());

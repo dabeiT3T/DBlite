@@ -3,6 +3,7 @@
 namespace Database\Traits;
 
 use Exception;
+use Database\DBlite;
 
 trait Execute {
 
@@ -36,7 +37,8 @@ trait Execute {
             $this->_where || 
             $this->_groupBy || 
             $this->_orderBy || 
-            $this->_skip
+            $this->_skip ||
+            $this->_take
         )
             throw new Exception("Error Processing Request", 1);
             
@@ -57,6 +59,24 @@ trait Execute {
 
     public function paginate($per=15, $page=1)
     {
-        
+        if ($this->_skip || $this->_take)
+            throw new Exception("Error Processing Request", 1);
+
+        $per    = max(intval($per), 1);
+        $page   = max(intval($page), 1);
+        $pages  = [];
+        $pages['per_page'] = $per;
+        $total  = intval(DBlite::table($this->_table)->select('COUNT(*) as total')->first()['total']);
+        $pages['total'] = $total;
+        $pages['last_page']     = (int)ceil($total/$per);
+        $pages['current_page']  = min($page, $pages['last_page']);
+        $pages['from']  = ($pages['current_page']-1) * $per + 1;
+        $pages['to']    = $pages['from'] + min($per, $total-$pages['from']);
+
+        // get data
+        $this->_skip = $pages['from'] - 1;
+        $this->_take = $per;
+        $pages['data'] = $this->get();
+        return $pages;
     }
 }

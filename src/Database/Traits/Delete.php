@@ -11,7 +11,8 @@ trait Delete {
         if ($this->_join || 
             $this->_groupBy || 
             $this->_orderBy || 
-            $this->_skip
+            $this->_skip ||
+            $this->_take
         )
             throw new Exception("Error Processing Request", 1);
 

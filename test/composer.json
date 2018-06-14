@@ -1,4 +1,16 @@
 {
+    "name": "DBlite",
+    "description": "It is like Eloquent in Laravel, but u can use it when u are writin' code without frame.",
+    "authors": [
+        {
+            "name": "dabei",
+            "email": "dabei.status404@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "PDO": ""
+    },
     "autoload": {
         "psr-4": {
             "Database\\": "../src/Database"

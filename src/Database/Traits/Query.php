@@ -23,6 +23,7 @@ trait Query {
         }
 
         $this->_select .= ($this->_select? ', ': '').implode(', ', $args);
+        return $this;
     }
 
     protected function quote($arg)
