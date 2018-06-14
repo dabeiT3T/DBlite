@@ -57,10 +57,15 @@ trait Execute {
         }
     }
 
-    public function paginate($per=15, $page=1)
+    public function paginate($per=15, $col='page', $page=null)
     {
         if ($this->_skip || $this->_take)
             throw new Exception("Error Processing Request", 1);
+
+        // get page from $_GET
+        if ($page === null) {
+            $page = $_GET[$col] ?? 1;
+        }
 
         $per    = max(intval($per), 1);
         $page   = max(intval($page), 1);
@@ -72,6 +77,10 @@ trait Execute {
         $pages['current_page']  = min($page, $pages['last_page']);
         $pages['from']  = ($pages['current_page']-1) * $per + 1;
         $pages['to']    = $pages['from'] + min($per, $total-$pages['from']);
+        $next = min($pages['current_page']+1, $pages['last_page']);
+        $prev = max($pages['current_page']-1, 1);
+        $pages['next_page_url'] = $pages['current_page'] == $pages['last_page']? null: "{$_SERVER['REQUEST_URI']}?page={$next}";
+        $pages['prev_page_url'] = $pages['current_page'] == 1? null: "{$_SERVER['REQUEST_URI']}?{$col}={$prev}";
 
         // get data
         $this->_skip = $pages['from'] - 1;
