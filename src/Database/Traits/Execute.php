@@ -71,7 +71,7 @@ trait Execute {
         $page   = max(intval($page), 1);
         $pages  = [];
         $pages['per_page'] = $per;
-        $total  = intval(DBlite::table($this->_table)->select('COUNT(*) as total')->first()['total']);
+        $total  = $this->count();
         $pages['total'] = $total;
         $pages['last_page']     = (int)ceil($total/$per);
         $pages['current_page']  = min($page, $pages['last_page']);
