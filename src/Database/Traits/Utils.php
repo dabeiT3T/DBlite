@@ -6,13 +6,23 @@ use Exception;
 
 trait Utils {
 
-    protected function combineQuery()
+    protected function combineSelect($col=null)
     {
         $query = 'SELECT ';
-        if (!$this->_select)
-            $query .= "* FROM {$this->_table}";
-        else
-            $query .= "{$this->_select} FROM {$this->_table}";
+        if (!$col) {
+            if (!$this->_select)
+                $query .= "* FROM {$this->_table}";
+            else
+                $query .= "{$this->_select} FROM {$this->_table}";
+        } else
+            $query .= "{$col} FROM {$this->_table}";
+
+        return $query;
+    }
+
+    protected function combineQuery($select=null)
+    {
+        $query = $this->combineSelect($select);
         if ($this->_join)
             $query .= " {$this->_join}";
         if ($this->_where)
