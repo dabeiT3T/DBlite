@@ -71,12 +71,15 @@ trait Execute {
         $page   = max(intval($page), 1);
         $pages  = [];
         $pages['per_page'] = $per;
+        $groupBy = $this->_groupBy;
+        $this->_groupBy = '';
         $total  = $this->count();
+        $this->_groupBy = $groupBy;
         $pages['total'] = $total;
         $pages['last_page']     = (int)ceil($total/$per);
         $pages['current_page']  = min($page, $pages['last_page']);
         $pages['from']  = ($pages['current_page']-1) * $per + 1;
-        $pages['to']    = $pages['from'] + min($per, $total-$pages['from'])-1;
+        $pages['to']    = $pages['from'] + min($per-1, $total-$pages['from']);
         $next = min($pages['current_page']+1, $pages['last_page']);
         $prev = max($pages['current_page']-1, 1);
         $pages['next_page_url'] = $pages['current_page'] == $pages['last_page']? null: "{$_SERVER['PHP_SELF']}?page={$next}";
