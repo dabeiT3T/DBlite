@@ -28,13 +28,14 @@ trait Join {
      */
     public function rightJoin($table, $on)
     {
-        
+        $this->_join .= ($this->_join? ' ': '').'right join '.$table.' on '.$on;
+        return $this;
     }
 
     /**
      * outter join
      */
-    public function outterJoin($table, $on)
+    public function outerJoin($table, $on)
     {
         
     }
