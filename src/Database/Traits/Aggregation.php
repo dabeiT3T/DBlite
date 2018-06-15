@@ -11,7 +11,7 @@ trait Aggregation {
     {
         if (!$this->_db) throw new Exception("Error Processing Request", 1);
 
-        $rows = $this->_db->query($this->combineALLQuery("COUNT({$count}) as ct"), \PDO::FETCH_ASSOC);
+        $rows = $this->_db->query($this->combineQuery("COUNT({$count}) as ct"), \PDO::FETCH_ASSOC);
         if (!$rows) throw new Exception("Error Processing Request", 1);
         return $rows->fetch()['ct'];
     }
