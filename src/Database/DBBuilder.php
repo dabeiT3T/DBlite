@@ -12,6 +12,7 @@ use Database\Traits\Update;
 use Database\Traits\Execute;
 use Database\Traits\GroupBy;
 use Database\Traits\OrderBy;
+use Database\Traits\Aggregation;
 
 class DBBuilder {
     
@@ -20,6 +21,7 @@ class DBBuilder {
 
     use Join, Limit, Utils, Query, Execute, GroupBy, OrderBy;
     use Delete, Insert, Update;
+    use Aggregation;
 
     protected function setDB()
     {
