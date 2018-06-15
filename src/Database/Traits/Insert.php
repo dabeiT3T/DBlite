@@ -35,6 +35,9 @@ trait Insert {
 
         $exec = "INSERT INTO {$this->_table} " . $this->combineInsert($data);
 
-        return $this->_db->exec($exec);
+        if ($this->_db->exec($exec))
+            return ['id' => $this->_db->lastInsertId()];
+        else
+            throw new Exception("Error Processing Request", 1);
     }
 }

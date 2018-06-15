@@ -19,7 +19,8 @@ trait Join {
      */
     public function leftJoin($table, $on)
     {
-        
+        $this->_join .= ($this->_join? ' ': '').'left join '.$table.' on '.$on;
+        return $this;
     }
 
     /**
