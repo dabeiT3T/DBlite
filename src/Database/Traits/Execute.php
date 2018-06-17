@@ -28,7 +28,7 @@ trait Execute {
         if (!$this->_db) throw new Exception("Error Processing Request", 1);
 
         $rows = $this->_db->query($this->combineQuery(), \PDO::FETCH_ASSOC);
-        return $rows? $rows->fetchAll(): null;
+        return $rows? $rows->fetchAll(): [];
     }
 
     public function find($id, $col='id')
@@ -78,7 +78,7 @@ trait Execute {
         $pages['total'] = $total;
         $pages['last_page']     = (int)ceil($total/$per);
         $pages['current_page']  = min($page, $pages['last_page']);
-        $pages['from']  = ($pages['current_page']-1) * $per + 1;
+        $pages['from']  = max(($pages['current_page']-1), 0) * $per + 1;
         $pages['to']    = $pages['from'] + min($per-1, $total-$pages['from']);
         $next = min($pages['current_page']+1, $pages['last_page']);
         $prev = max($pages['current_page']-1, 1);
