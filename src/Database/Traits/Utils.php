@@ -59,17 +59,17 @@ trait Utils {
         return $query;
     }
 
-    public function beginTransaction()
+    public static function beginTransaction()
     {
         return \PDO::beginTransaction();
     }
 
-    public function commit()
+    public static function commit()
     {
         return \PDO::commit();
     }
 
-    public function rollBack()
+    public static function rollBack()
     {
         return \PDO::rollBack();
     }
