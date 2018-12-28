@@ -25,7 +25,7 @@ class DBBuilder {
 
     protected function setDB()
     {
-        $env = (new GetEnv)->getDBSets();
+        $env = (new GetEnv)->getDBIni();
         $req = "{$env['DB_CONNECTION']}:host={$env['DB_HOST']};port={$env['DB_PORT']};dbname={$env['DB_DATABASE']}";
         $this->_db = new \PDO($req, $env['DB_USERNAME'], $env['DB_PASSWORD']);
     }

@@ -30,4 +30,12 @@ class GetEnv {
 
         return $data;
     }
+
+    public function getDBIni()
+    {
+        if (!is_readable($this->path))
+            throw new Exception("Error Processing Request", 1);
+
+        return parse_ini_file($this->path);
+    }
 }
